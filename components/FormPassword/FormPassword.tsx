@@ -62,8 +62,15 @@ function generatePassword(
     password += charset[randomIndex];
   }
 
+  if (numbers && password.match(/[0-9]/g)?.length === 0) {
+    return generatePassword(length, special, numbers, uppercase);
+  }
+
   if (uppercase && password.toLowerCase() === password) {
-    console.log("password", password);
+    return generatePassword(length, special, numbers, uppercase);
+  }
+
+  if (special && password.match(/[!@#$%^&*()]/g)?.length === 0) {
     return generatePassword(length, special, numbers, uppercase);
   }
 
